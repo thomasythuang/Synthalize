@@ -12,19 +12,27 @@
 
 	<!-- Angular, Fonts, and Icons -->
 	<script src="/resources/angular.min.js"></script>
+	<script src="/resources/angular-route.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
 
 <!-- load user data into angular controller -->
 <body ng-controller="mainController">
 	
-	<h1>HOME PAGE WOOHOO</h1>
+	<div ng-view></div>
+
+<footer class="footer centered">
+  <div class="container">
+    <p class="text-muted"><p>Made in 2015 for <a href="http://cs.northwestern.edu/~pardo/courses/eecs352/" target="_blank">EECS 352</a> with Bryan Pardo</p></p>
+  </div>
+</footer>
 
 
 <!-- Resources -->
 
 <!-- CSS -->
 <link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/sticky-footer.css">
 <link rel="stylesheet" href="/resources/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/font-awesome.min.css">
 
@@ -34,7 +42,9 @@
 
 <!-- Angular Custom Components -->
 <script src="/js/coreModule.js"></script>
+<script src="/js/ngRoutes.js"></script>
 <script src="/js/controllers/mainCtrl.js"></script>
+<script src="/js/controllers/listenCtrl.js"></script>
 
 </body>
 </html>

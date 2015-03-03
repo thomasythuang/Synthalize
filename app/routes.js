@@ -8,5 +8,9 @@ module.exports = function(app){
 		res.render('index.html', {});
 	});
 
+	app.get('/listen', function(req, res){
+		res.render('index.html', {});
+	})
+
 };
 

@@ -3,17 +3,21 @@
 
 	$routeProvider
 
-		/*
+		
 		// Gallery
 		.when('/', {
-			templateUrl: 'views/main.html',
-			//controller: 'galleryController',
+			templateUrl: 'views/home.html',
+			//controller: 'homeController'
 		})
 
+		.when('/listen', {
+			templateUrl: 'views/listen.html',
+			controller: 'listenController'
+		})
 		
 		.when('/404', {
 			templateUrl: '../views/404.html',
-		}); */
+		}); 
 
 	$locationProvider.html5Mode(true);
 

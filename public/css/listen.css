@@ -1,0 +1,10 @@
+.container{
+	max-width: 900px;
+}
+
+.dir{
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-top: 5px; 
+	font-size: 1.5em;
+}

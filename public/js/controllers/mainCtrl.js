@@ -6,6 +6,6 @@ var app = angular.module('mainController', []);
 
 app.controller('mainController', function($scope, $http){
 	
-	console.log('controller loaded!');
+	console.log('main controller loaded!');
 
 });
