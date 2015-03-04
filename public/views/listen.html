@@ -21,6 +21,41 @@
   </div>
 </div>
 
-<div class="container">
-	<p class="dir">0. Find a place without background noise and use high quality headphones/speakers (not laptop speakers)</p>
+<div class="centered" ng-hide="loaded">
+	<span class="fa fa-spinner fa-spin"></span>
 </div>
+
+<div class="container" ng-show="loaded">
+
+	<!-- <button type="button" class="btn btn-default" ng-click="submit()">Test</button> -->
+
+	<p class="dir">0. Find a place without background noise and use high quality headphones/speakers (not laptop speakers)</p>
+
+	<p class="dir">1. Listen to the following clips all the way through, and for each of the sounds, type a word that describes the sound (e.g. "buzzy" or "crunchy"). 
+	<div class="form-group">
+		<label for="descriptor1">Sound 1</label>
+		<input ng-required="true" ng-model="desc[0]" class="form-control" id="descriptor1" placeholder="">
+	</div>
+
+	<div class="form-group">
+		<label for="descriptor2">Sound 2</label>
+		<input ng-required="true" ng-model="desc[1]" class="form-control" id="descriptor2" placeholder="">
+	</div>
+
+	<div class="form-group">
+		<label for="descriptor3">Sound 3</label>
+		<input ng-required="true" ng-model="desc[2]" class="form-control" id="descriptor3" placeholder="">
+	</div>
+
+	<div class="form-group">
+		<label for="descriptor4">Sound 4</label>
+		<input ng-required="true" ng-model="desc[3]" class="form-control" id="descriptor4" placeholder="">
+	</div>
+
+	<p class="dir">2. That's all, thanks!</p>
+
+	<!-- <button ng-click="create()">Create</button> -->
+	<button type="button" class="btn btn-primary" ng-click="submit()">Submit</button>
+
+</div>
+
