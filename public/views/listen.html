@@ -32,9 +32,9 @@
 	<button type="button" class="btn btn-default" ng-click="">Test</button>
 	</a> -->
 
-	<p class="dir">1. Find a place without background noise and use high quality headphones/speakers (not laptop speakers)</p>
+	<p class="dir">1. Find a place to listen to these sounds without a lot of background noise, and please use headphones.</p>
 
-	<p class="dir">2. Listen to the following clips all the way through, and for each of the sounds, type a word that describes the sound (e.g. "buzzy", "airy", or "smooth"). 
+	<p class="dir">2. Listen to each sound all the way through.  For each, type one word that describes that sound (e.g. "buzzy", "airy", "flute", "smooth").
 	<div class="form-group">
 		<label for="descriptor1">Sound 1</label>
 		<audio controls>
@@ -46,7 +46,7 @@
 	<div class="form-group">
 		<label for="descriptor2">Sound 2</label>
 		<audio controls>
-			<source id="sound2" src="sounds/2.wav" type="audio/wav">
+			<source id="sound2" type="audio/wav">
 		</audio>
 		<input ng-required="true" ng-model="desc[1]" class="form-control" id="descriptor2" placeholder="">
 	</div>
@@ -54,7 +54,7 @@
 	<div class="form-group">
 		<label for="descriptor3">Sound 3</label>
 		<audio controls>
-			<source id="sound3" src="sounds/3.wav" type="audio/wav">
+			<source id="sound3" type="audio/wav">
 		</audio>
 		<input ng-required="true" ng-model="desc[2]" class="form-control" id="descriptor3" placeholder="">
 	</div>
@@ -62,12 +62,19 @@
 	<div class="form-group">
 		<label for="descriptor4">Sound 4</label>
 		<audio controls>
-			<source id="sound4" src="sounds/4.wav" type="audio/wav">
+			<source id="sound4" type="audio/wav">
 		</audio>
 		<input ng-required="true" ng-model="desc[3]" class="form-control" id="descriptor4" placeholder="">
 	</div>
-	<!-- 
-	<p class="dir">3. That's all, thanks! If you were directed here from Mechanical Turk, you'll get a code on the next page to validate your submission!</p> -->
+
+	<div class="form-group">
+		<label for="descriptor5">Sound 5</label>
+		<audio controls>
+			<source id="sound5" src="sounds/test.wav" type="audio/wav">
+		</audio>
+		<input ng-required="true" class="form-control" id="descriptor5" placeholder="">
+	</div>
+
 
 	<br>
 
