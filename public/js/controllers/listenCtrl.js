@@ -4,27 +4,32 @@
 
 var app = angular.module('listenController', []);
 
-app.controller('listenController', function($scope, $http, $firebase){
+app.controller('listenController', function($scope, $http, $location, $firebase){
 	
-	$scope.loaded = false;
-	$scope.desc = [];
-	var indices;
-
+	
 	var ref = new Firebase("https://synthalize.firebaseio.com/");
 	var data = $firebase(ref).$asArray();
+	$scope.loaded = false;
+	$scope.desc = [];
+	$scope.links = [];
+	var indices = getRandomNums(4, 48);
 
+	// Set appropriate sound links
+	for (var i = 0; i < indices.length; i++){
+		document.getElementById("sound" + (i+1).toString()).src = "sounds/" + indices[i].toString() + ".wav";
+	}
+
+	// Show the DOM once data is loaded
 	data.$loaded(function(){
-
 		$scope.loaded = true;
-
-		indices = getRandomNums(4, 32);
 	});
 
 	$scope.submit = function(){
 		var valid = true;
 		for (var n = 0; n < indices.length; n++){
-			if ($scope.desc[i] == undefined)
+			if ($scope.desc[n] == undefined){
 				valid = false;
+			}
 		}
 
 		if (valid){
@@ -51,13 +56,19 @@ app.controller('listenController', function($scope, $http, $firebase){
 				}
 		
 				updated[i] = data[indices[i]];
-				console.log(updated[i]);
+				//console.log(updated[i]);
 				updated[i].descriptors = words;
 				data.$save(updated[i]);
+
+				$location.path('/done');
 			}
 		}else{
 			alert('Please listen to all the sounds and fill out all the forms!')
 		}
+	}
+
+	$scope.getLink = function(n){
+		return 'sounds/' + $scope.links[n];
 	}
 
 	$scope.test = function(){
@@ -84,8 +95,8 @@ app.controller('listenController', function($scope, $http, $firebase){
 			data.$remove(i);
 		}
 
-		for (var i=0; i<32; i++){
-			data.$add({id: i, link: "link here", descriptors: [
+		for (var i=0; i<48; i++){
+			data.$add({id: i, link: i.toString() + ".wav", descriptors: [
 				["loud", 0]
 				]
 			});

@@ -10,3 +10,13 @@
 .fa-spinner{
 	font-size: 3em !important;
 }
+
+audio{
+	display: block !important;
+	margin-bottom: 5px;
+}
+
+label{
+	margin-bottom: 0px !important;
+	font-size: 1.5em !important;
+}
