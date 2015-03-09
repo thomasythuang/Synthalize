@@ -17,6 +17,10 @@
 		.when('/done', {
 			templateUrl: 'views/done.html',
 		})
+
+		.when('/visualize', {
+			templateUrl: 'views/visualizer.html',
+		})
 		
 		.when('/404', {
 			templateUrl: '../views/404.html',

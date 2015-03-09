@@ -16,5 +16,9 @@ module.exports = function(app){
 		res.render('index.html', {});
 	})
 
+	app.get('/visualize', function(req, res){
+		res.render('index.html', {});
+	})
+
 };
 
