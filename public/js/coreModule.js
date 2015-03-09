@@ -5,5 +5,6 @@ var app = angular.module('Synthalize', [
 	'ngRoutes',
 	'mainController',
 	'listenController', 
+	'homeController',
 	'firebase',
 ]);	

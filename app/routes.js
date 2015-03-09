@@ -15,10 +15,10 @@ module.exports = function(app){
 	app.get('/done', function(req, res){
 		res.render('index.html', {});
 	})
-
+	/*
 	app.get('/visualize', function(req, res){
 		res.render('index.html', {});
-	})
+	}) */
 
 };
 

@@ -1,3 +1,14 @@
 #search div {
-	margin-bottom: 5px;
+	margin-bottom: 15px;
+}
+
+#mainSound{
+	display: block !important;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 15px;
+}
+
+.sound-btn{
+	width: 100%;
 }

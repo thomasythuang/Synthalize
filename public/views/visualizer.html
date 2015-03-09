@@ -20,11 +20,28 @@
     </div>
   </div>
 </div>
+
 <div class="container">
-  <div class="col-md-6 col-md-offset-3" id="search">
+  <div class="col-md-8 col-md-offset-2" id="search">
     <div class="col-md-8 col-md-offset-2">
       <input id="searchbox" class="form-control" type="text" placeholder="Search"/>
     </div>
+
+    <audio controls id="mainSound">
+			<source id="soundSource" type="audio/wav">
+		</audio>
+
+		<div class="centered" ng-hide="soundLoaded">
+			<span class="fa fa-spinner fa-spin"></span>
+		</div>
+
+    <div ng-repeat="sound in sounds" class="col-md-3 col-sm-3">
+    	<button type="button" class="btn btn-default sound-btn" ng-click="setSound(sound)">
+    		{{getWord(sound.descriptors)}}
+  		</button>
+    </div>
+    
+    <!--
     <div class="col-md-4">
       <button type="button" class="col-md-10 col-md-offset-1 sound btn btn-default">Lazer</button> 
     </div>
@@ -54,6 +71,6 @@
     </div>
     <div class="col-md-4">
       <button type="button" class="col-md-10 col-md-offset-1 sound btn btn-default">Voltage Jump</button> 
-    </div>
+    </div> -->
   </div>
 </div>

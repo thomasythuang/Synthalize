@@ -3,10 +3,9 @@
 
 	$routeProvider
 		
-		// Gallery
 		.when('/', {
-			templateUrl: 'views/home.html',
-			//controller: 'homeController'
+			templateUrl: 'views/visualizer.html',
+			controller: 'homeController'
 		})
 
 		.when('/listen', {
@@ -18,9 +17,11 @@
 			templateUrl: 'views/done.html',
 		})
 
+		/*
 		.when('/visualize', {
 			templateUrl: 'views/visualizer.html',
-		})
+			controller: 'homeController',
+		}) */
 		
 		.when('/404', {
 			templateUrl: '../views/404.html',
