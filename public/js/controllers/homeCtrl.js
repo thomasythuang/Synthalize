@@ -32,7 +32,10 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
 		var path = "sounds/" + sound.link;
 
 		source.src = path;
+		
+		audio.pause();
 		audio.load();
+		audio.play();
 
 		$scope.soundLoaded = true;
 	}

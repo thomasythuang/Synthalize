@@ -1,14 +1,1 @@
-#search div {
-	margin-bottom: 15px;
-}
-
-#mainSound{
-	display: block !important;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 15px;
-}
-
-.sound-btn{
-	width: 100%;
-}
+#sounds div{margin-bottom:15px}#mainSound{display:block !important;margin-left:auto;margin-right:auto;margin-bottom:15px}#semanticTags{margin:10px}#semanticTags .tag{margin:10px}#semanticTags :hover{cursor:pointer}#semanticTags :hover .name,#semanticTags :hover .count{color:#EE0000}.sound-btn{width:100%;border:none;background:#fff}

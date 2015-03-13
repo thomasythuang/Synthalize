@@ -22,12 +22,40 @@
 </div>
 
 <div class="container">
-  <div class="col-md-8 col-md-offset-2" id="search">
-    <div class="col-md-8 col-md-offset-2">
-      <input id="searchbox" class="form-control" type="text" placeholder="Search"/>
+  <div class="col-md-4" id="semantics">
+    <div class="col-md-10 col-md-offset-1" id="search">
+      <div class="col-md-12">
+        <input id="searchbox" class="form-control" type="text" placeholder="Search"/>
+      </div>
+      <div class="col-md-12">
+        <ul class="list-unstyled" id="semanticTags">
+          <li class="tag">
+            <span class="name">Happy</span>
+            <span class="pull-right text-muted count">16</span>
+          </li>
+          <li class="tag">
+            <span class="name">Sad</span>
+            <span class="pull-right text-muted count">5</span>
+          </li>
+          <li class="tag">
+            <span class="name">Space</span>
+            <span class="pull-right text-muted count">6</span>
+          </li>
+          <li class="tag">
+            <span class="name">Tech</span>
+            <span class="pull-right text-muted count">28</span>
+          </li>
+          <li class="tag">
+            <span class="name">Wind Instrument</span>
+            <span class="pull-right text-muted count">13</span>
+          </li>
+        </ul>
+      </div>
     </div>
+  </div>
 
-    <audio controls id="mainSound">
+  <div class="col-md-8" id="sounds">
+    <audio controls autoplay class="hidden" id="mainSound">
 			<source id="soundSource" type="audio/wav">
 		</audio>
 
@@ -40,37 +68,5 @@
     		{{getWord(sound.descriptors)}}
   		</button>
     </div>
-    
-    <!--
-    <div class="col-md-4">
-      <button type="button" class="col-md-10 col-md-offset-1 sound btn btn-default">Lazer</button> 
-    </div>
-    <div class="col-md-4">
-      <button type="button" class="col-md-10 col-md-offset-1 sound btn btn-default">Piano</button> 
-    </div>
-    <div class="col-md-4">
-      <button type="button" class="col-md-10 col-md-offset-1 sound btn btn-default">Baseball</button> 
-    </div>
-    <div class="col-md-4">
-      <button type="button" class="col-md-10 col-md-offset-1 sound btn btn-default">Flute</button> 
-    </div>
-    <div class="col-md-4">
-      <button type="button" class="col-md-10 col-md-offset-1 sound btn btn-default">Trumpet</button> 
-    </div>
-    <div class="col-md-4">
-      <button type="button" class="col-md-10 col-md-offset-1 sound btn btn-default">Space Age</button> 
-    </div>
-    <div class="col-md-4">
-      <button type="button" class="col-md-10 col-md-offset-1 sound btn btn-default">Marimba</button> 
-    </div>
-    <div class="col-md-4">
-      <button type="button" class="col-md-10 col-md-offset-1 sound btn btn-default">Drip</button> 
-    </div>
-    <div class="col-md-4">
-      <button type="button" class="col-md-10 col-md-offset-1 sound btn btn-default">Plinko</button> 
-    </div>
-    <div class="col-md-4">
-      <button type="button" class="col-md-10 col-md-offset-1 sound btn btn-default">Voltage Jump</button> 
-    </div> -->
   </div>
 </div>
