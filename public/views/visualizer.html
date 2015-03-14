@@ -24,30 +24,44 @@
 <div class="container">
   <div class="col-md-4" id="semantics">
     <div class="col-md-10 col-md-offset-1" id="search">
+      <form class="form-horizontal col-md-12">
+        <input ng-model="query" id="searchbox" class="form-control" placeholder="Search"/>
+        <label class="control-label col-md-5">sort by:</label>
+        <div class="col-md-7">
+          <select id="filter" class="form-control" ng-init="order='name'" ng-model="order">
+            <option value="name">ABC</option>
+            <option value="count">Count</option>
+          </select>
+        </div>
+        <div class="col-md-12">
+          <label class="radio-inline">
+            <input ng-model="direction" type="radio" name="direction" checked>Increasing
+          </label>
+          <label class="radio-inline">
+            <input ng-model="direction" type="radio" name="direction" value="reverse">Decreasing
+          </label>
+        </div>
+      </form>
       <div class="col-md-12">
-        <input id="searchbox" class="form-control" type="text" placeholder="Search"/>
+        <ul class="list-unstyled" id="selectedTags">
+          <li class="selected-tag" ng-repeat="tag in selectedTags track by $index">
+            <a href="#">
+              <span class="name">{{ tag.name }}</span>
+              <span class="pull-right text-muted related">related</span>
+              &&nbsp;
+              <span class="pull-right text-muted unselect">unselect</span>
+            </a>
+          </li>
+        </ul>
       </div>
       <div class="col-md-12">
-        <ul class="list-unstyled" id="semanticTags">
-          <li class="tag">
-            <span class="name">Happy</span>
-            <span class="pull-right text-muted count">16</span>
-          </li>
-          <li class="tag">
-            <span class="name">Sad</span>
-            <span class="pull-right text-muted count">5</span>
-          </li>
-          <li class="tag">
-            <span class="name">Space</span>
-            <span class="pull-right text-muted count">6</span>
-          </li>
-          <li class="tag">
-            <span class="name">Tech</span>
-            <span class="pull-right text-muted count">28</span>
-          </li>
-          <li class="tag">
-            <span class="name">Wind Instrument</span>
-            <span class="pull-right text-muted count">13</span>
+        <h3 class="placeholder text-center text-muted" ng-hide="query">
+          Start typing in the search field to display tags
+        </h3>
+        <ul class="list-unstyled" ng-show="query" id="semanticTags">
+          <li ng-click="choose(tag, $event)" ng-repeat="tag in tags | filter: query | orderBy: order : direction" class="tag">
+            <span class="name">{{ tag.name }}</span>
+            <span class="pull-right text-muted count">{{ tag.count }}</span>
           </li>
         </ul>
       </div>
@@ -55,7 +69,7 @@
   </div>
 
   <div class="col-md-8" id="sounds">
-    <audio controls autoplay class="hidden" id="mainSound">
+    <audio controls autoplay id="mainSound">
 			<source id="soundSource" type="audio/wav">
 		</audio>
 
@@ -64,8 +78,9 @@
 		</div>
 
     <div ng-repeat="sound in sounds" class="col-md-3 col-sm-3">
-    	<button type="button" class="btn btn-default sound-btn" ng-click="setSound(sound)">
-    		{{getWord(sound.descriptors)}}
+    	<button id="sound{{sound.id}}" type="button" class="sound-btn" ng-click="setSound(sound)">
+    		{{sound.original}}
+        <i style="display:none;" class="fa fa-volume-up"></i>
   		</button>
     </div>
   </div>

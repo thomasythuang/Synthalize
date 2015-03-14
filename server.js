@@ -1,9 +1,13 @@
 // server.js
 
 // set up ======================================================================
-var express 		= require('express');
+var express = require('express');
 var app 		= express(); 			// create app w/ express
 var port 		= process.env.PORT || 5000; 	// set port
+
+// css preprocessor
+
+require('./gruntfile.js')(app);
 
 // express modules
 var morgan 		= require('morgan');
