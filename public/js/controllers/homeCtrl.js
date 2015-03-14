@@ -4,24 +4,28 @@
 
 var app = angular.module('homeController', []);
 
-app.controller('homeController', function($scope, $http, $location, $q, $firebase){
+app.controller('homeController', function($scope, $http, $location, $firebase){
 	
 	
-	var ref = new Firebase("https://synthalize.firebaseio.com/");
-	var main = $firebase(ref).$asArray();
+	//var ref = new Firebase("https://synthalize.firebaseio.com/");
+	//var main = $firebase(ref).$asArray();
 	$scope.loaded = false;
 	$scope.sounds = [];
+	$scope.tags = [];
 	$scope.soundLoaded = true;
+	var main = {};
 
-	// Show the DOM once data is loaded
-	main.$loaded(function(){
-
-		for (var i = 0; i < main.length; i++){
-			$scope.sounds[i] = main[i];
-		}
-		console.log($scope.sounds);
-		$scope.loaded = true;
-	});
+	$http.get('https://api.myjson.com/bins/55bwf')
+		.success(function(data){
+			main = data;
+			$scope.sounds = main.sounds;
+			$scope.tags = main.tags;
+			$scope.loaded = true;
+			console.log(main);
+		})
+		.error(function(data, status, headers, config){
+			console.log(status);
+		});
 
 	$scope.setSound = function(sound){
 		$scope.soundLoaded = false;
@@ -49,9 +53,61 @@ app.controller('homeController', function($scope, $http, $location, $q, $firebas
 		console.log(indices);
 	}
 
+	/*
+	// Show the DOM once data is loaded
+	main.$loaded(function(){
+
+		for (var i = 0; i < main.length; i++){
+			$scope.sounds[i] = main[i];
+		}
+
+		main = {
+			tags: [],
+			sounds: []
+		};
+		
+		main.sounds = $scope.sounds;
+
+		for (var j = 0; j < main.sounds.length; j++){
+			for (var k = 1; k < main.sounds[j].tags.length; k++){
+				var index = checkDup(main.sounds[j].tags[k], main.tags);
+				if (index == false){
+					main.tags.push({
+						tagName: main.sounds[j].tags[k],
+						indices: [j]
+					});
+				}else{
+					main.tags[index].indices.push(j);
+				}
+			}
+		}
+
+		console.log(main);
+		//console.log(JSON.stringify(main, null, 2));
+
+		var url = "https://api.myjson.com/bins";
+		$http.post(url, main)
+			.success(function(data){
+				console.log(data);
+			});
+
+		//console.log($scope.sounds);
+		$scope.loaded = true;
+	});
+
+	function checkDup(word, arr){
+		for (var i = 0; i < arr.length; i++){
+			for (var j = 0; j < arr[i].indices.length; j++){
+					if (arr[i].tagName == word)
+						return i;
+			}
+		}
+		return false;
+	} */
+
+	/*
 	$scope.getTags = function(){
 		var url = 'http://words.bighugelabs.com/api/2/b479b48665be0a6e5299356172937701/';
-
 		
 		//for (var i = 0; i < $scope.sounds.length; i++){
 		var i = 47;
@@ -75,6 +131,6 @@ app.controller('homeController', function($scope, $http, $location, $q, $firebas
 					}); 
 			}
 			console.log($scope.sounds[i]);
-	}
+	} */
 
 });
