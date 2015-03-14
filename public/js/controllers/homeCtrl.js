@@ -4,32 +4,26 @@
 
 var app = angular.module('homeController', []);
 
-app.controller('homeController', function($scope, $http, $location, $q, $firebase){
+app.controller('homeController', function($scope, $http, $location, $firebase){
 	
-	
-	var ref = new Firebase("https://synthalize.firebaseio.com/");
-	var main = $firebase(ref).$asArray();
 	$scope.loaded = false;
 	$scope.sounds = [];
 	$scope.tags = [];
 	$scope.selectedTags = [];
 	$scope.soundLoaded = true;
+	var main = {};
 
-	// Show the DOM once data is loaded
-	main.$loaded(function(){
-		for (var i = 0; i < main.length; i++) {
-			$scope.sounds[i] = main[i];
-		}
-
-		var soundOneTags = $scope.sounds[0].tags;
-		for (var i = 0; i < soundOneTags.length; i++) {
-			if (soundOneTags[i])
-				$scope.tags[i] = { name: soundOneTags[i], count: Math.floor((Math.random() * 20) + 1) };
-		}
-
-		console.log($scope.sounds);
-		$scope.loaded = true;
-	});
+	$http.get('https://api.myjson.com/bins/55bwf')
+		.success(function(data){
+			main = data;
+			$scope.sounds = main.sounds;
+			$scope.tags = main.tags;
+			$scope.loaded = true;
+			console.log(main);
+		})
+		.error(function(data, status, headers, config){
+			console.log(status);
+		});
 
 	$scope.setSound = function(sound){
 		$scope.soundLoaded = false;
@@ -56,34 +50,6 @@ app.controller('homeController', function($scope, $http, $location, $q, $firebas
 	$scope.test = function() {
 		console.log($scope.desc)
 		console.log(indices);
-	}
-
-	$scope.getTags = function() {
-		var url = 'http://words.bighugelabs.com/api/2/b479b48665be0a6e5299356172937701/';
-
-		
-		//for (var i = 0; i < $scope.sounds.length; i++){
-		var i = 47;
-			for (var j = 1; j < $scope.sounds[i].descriptors.length; j++){
-				var word = $scope.sounds[i].descriptors[j][0];
-				
-				$http.get(url + word + '/json')
-					.success(function(data){
-						var res = data;
-						//console.log(res);
-						for (var key in res){
-							for (var k = 0; k < res[key].syn.length; k++){
-								if ($scope.sounds[i].tags.indexOf(res[key].syn[k]) == -1)
-									$scope.sounds[i].tags.push(res[key].syn[k]);
-							}
-						}
-						console.log($scope.sounds[i]);
-						main.$save($scope.sounds[i]);
-					})
-					.error(function(data, status, headers, config){
-					}); 
-			}
-			console.log($scope.sounds[i]);
 	}
 
 	$scope.choose = function(tag, $event) {
