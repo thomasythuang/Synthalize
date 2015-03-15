@@ -5,14 +5,14 @@ var express = require('express');
 var app 		= express(); 			// create app w/ express
 var port 		= process.env.PORT || 5000; 	// set port
 
-// css preprocessor
-
-require('./gruntfile.js')(app);
-
 // express modules
 var morgan 		= require('morgan');
 var bodyParser 		= require('body-parser');
 var methodOverride 	= require('method-override');
+
+// css preprocessor  ============================================================
+
+require('./gruntfile.js');
 
 // express config
 app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users

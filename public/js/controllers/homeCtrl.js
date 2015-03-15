@@ -19,7 +19,9 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
 			$scope.sounds = main.sounds;
 			$scope.tags = main.tags;
 			$scope.loaded = true;
-			console.log(main);
+			$scope.selectedTags = [];
+			$scope.results = [];
+			console.log($scope.sounds[0]);
 		})
 		.error(function(data, status, headers, config){
 			console.log(status);
@@ -54,35 +56,38 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
 
 	$scope.choose = function(tag, $event) {
     tag.$tag = $($event.target);
+    console.log(tag.indices);
+    index = $scope.tags.indexOf(tag);
+   	$scope.tags.splice(index, 1);
     $scope.selectedTags.push(tag);
-    $scope.tags.pop(tag);
+
+    for (var i = 0; i < $scope.sounds.length; i++) {
+    	descriptors = $scope.sounds[i].descriptors;
+    	for (var j = 0; j < descriptors.length; j++) {
+    		if (tag.tagName == descriptors[j][0]) {
+    			$scope.results.push($scope.sounds[i]);
+    			break;
+    		}
+    	}
+    }
+
+    names = [];
+    ids = [];
+    console.log($scope.results[0]);
+    for (var i = 0; i < $scope.results.length; i++) {
+  		names.push($scope.results[i].original);
+  		ids.push($scope.results[i].link);
+    }
+
+  	console.log(ids);
+  	console.log(names);
   }
 
-});
+	$scope.unchoose = function(tag, $event) {
+    tag.$tag = $($event.target);
+    index = $scope.selectedTags.indexOf(tag);
+    $scope.selectedTags.splice(index, 1);
+    $scope.tags.push(tag);
+  }
 
-app.animation('.selected-tag', function() {
-  
-  return {
-    enter: function(element, done) {
-      var tag = element.scope().tag;
-      var targetPositions = {
-        top: element.position().top,
-        left: element.position().left
-      };
-      element.css('visibility', 'hidden');
-      var $originEl = tag.$tag;
-      var $clone = $originEl.clone();
-      $clone.css({
-        position: 'absolute',
-        top: $originEl.position().top,
-        left: $originEl.position().left
-      });
-      $('#selectedTags').append($clone);
-      $clone.animate(targetPositions, 3000, function() {
-        element.css('visibility', '');
-        $clone.remove();
-        done();
-      });
-    }
-  };
 });

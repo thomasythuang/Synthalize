@@ -2,9 +2,11 @@
 
 $text-color: #333;
 $muted-color: #777;
+$emph-color: #000;
 $red: #D00;
 $blue: #00B;
 $green: #070;
+$text-size: 14px;
 
 audio {
 	opacity: 0;
@@ -49,29 +51,54 @@ audio {
 #selectedTags {
 	margin: 10px;
 	.name { color: $green; }
-	.unselect, .related { opacity: 0; }
+	.unselect, .related {
+		opacity: 0;
+		margin-left: 12px;
+	}
 	.selected-tag {
 		margin: 10px;
 		@include transition(color 0.2s ease-in-out);
 		&:hover {
-			cursor: pointer;
-			a { text-decoration: none; }
 			.unselect, .related {
 				opacity: 1;
 				@include transition(opacity 0.2s ease-in-out);
+				&:hover {
+					cursor: pointer;
+					color: $muted-color + $green;
+					@include transition(color 0.2s ease-in-out);
+				}
 			}
 		}
 	}
 }
 
 .sound-btn {
+	color: $text-color;
+	font-size: $text-size;
 	width: 100%;
-	min-height: 45px;
+	min-height: 35px;
 	border: none;
 	background: white;
 	@include transition(color 0.2s ease-in-out);
 	&:focus, &:active, &:hover {
 		outline: none;
-		color: $text-color + $blue; 
+		color: $text-color + $blue !important; 
+	}
+	&.result{
+		font-size: $text-size + 4;
+		color: $emph-color;
+		font-weight: bold;
+		@include transition(all 0.2s ease-in-out);
+	}
+	&.best-result{
+		font-size: $text-size + 6;
+		color: $emph-color;
+		font-weight: bolder;
+		@include transition(all 0.2s ease-in-out);
+	}
+	&.non-result{
+		font-size: $text-size - 4;
+		color: $muted-color;
+		@include transition(all 0.2s ease-in-out);
 	}
 }
