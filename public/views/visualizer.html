@@ -28,23 +28,23 @@
         <input ng-model="query" id="searchbox" class="form-control" placeholder="Search"/>
         <label class="control-label col-md-5">sort by:</label>
         <div class="col-md-7">
-          <select id="filter" class="form-control" ng-init="order='indices.length'" ng-model="order">
+          <select id="filter" class="form-control" ng-init="order='-indices.length'" ng-model="order">
             <option value="tagName">ABC</option>
-            <option value="indices.length">Count</option>
+            <option value="-indices.length">Count</option>
           </select>
         </div>
-        <div class="col-md-12">
+       <!--  <div class="col-md-12">
           <label class="radio-inline">
             <input ng-model="direction" type="radio" name="direction" checked>Ascending
           </label>
           <label class="radio-inline">
             <input ng-model="direction" type="radio" name="direction" value="reverse">Descending
           </label>
-        </div>
+        </div> -->
       </form>
       <div id="tagLists" class="col-md-12">
         <ul class="list-unstyled" id="selectedTags">
-          <li class="selected-tag" ng-repeat="tag in selectedTags track by tag.tagName">
+          <li class="selected-tag" ng-repeat="tag in selectedTags">
             <span class="name">{{ tag.tagName }}</span>
             <span class="pull-right text-muted unselect"><i class="fa fa-close" ng-click="unchoose(tag, $event)"></i></span>
             <span class="pull-right text-muted related">related</span>
@@ -54,7 +54,7 @@
           Start typing in the search field to display tags
         </h3>
         <ul class="list-unstyled" id="semanticTags" ng-show="query">
-          <li ng-click="choose(tag, $event)" ng-repeat="tag in tags track by tag.tagName | filter: query | orderBy: order: direction | limitTo: 100" class="tag">
+          <li ng-click="choose(tag, $event)" ng-repeat="tag in tags | filter: query | orderBy: order | limitTo: 100" class="tag">
             <span class="name">{{ tag.tagName }}</span>
             <span class="pull-right text-muted count">{{ tag.indices.length }}</span>
           </li>

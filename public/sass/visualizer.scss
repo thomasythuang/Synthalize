@@ -33,7 +33,7 @@ audio {
 	#semanticTags {
 		margin: 5px;
 		padding: 5px;
-		max-height: 475px;
+		max-height: 500px;
 		overflow: scroll;
 		background: #F6F6F6;
 		.tag {
@@ -57,16 +57,12 @@ audio {
 	#selectedTags {
 		margin: 10px;
 		.name { color: $green; }
-		.unselect, .related {
-			opacity: 0;
-			margin-left: 12px;
-		}
+		.unselect, .related { margin-left: 12px; }
 		.selected-tag {
 			margin: 10px;
 			@include transition(color 0.2s ease-in-out);
 			&:hover {
 				.unselect, .related {
-					opacity: 1;
 					@include transition(opacity 0.2s ease-in-out);
 					&:hover {
 						cursor: pointer;
