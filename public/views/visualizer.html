@@ -44,7 +44,7 @@
       </form>
       <div id="tagLists" class="col-md-12">
         <ul class="list-unstyled" id="selectedTags">
-          <li class="selected-tag" ng-repeat="tag in selectedTags">
+          <li class="selected-tag" ng-repeat="tag in selectedTags track by tag.tagName">
             <span class="name">{{ tag.tagName }}</span>
             <span class="pull-right text-muted unselect"><i class="fa fa-close" ng-click="unchoose(tag, $event)"></i></span>
             <span class="pull-right text-muted related">related</span>
@@ -54,7 +54,7 @@
           Start typing in the search field to display tags
         </h3>
         <ul class="list-unstyled" id="semanticTags" ng-show="query">
-          <li ng-click="choose(tag, $event)" ng-repeat="tag in tags | filter: query | orderBy: order: direction | limitTo: 100" class="tag">
+          <li ng-click="choose(tag, $event)" ng-repeat="tag in tags track by tag.tagName | filter: query | orderBy: order: direction | limitTo: 100" class="tag">
             <span class="name">{{ tag.tagName }}</span>
             <span class="pull-right text-muted count">{{ tag.indices.length }}</span>
           </li>
