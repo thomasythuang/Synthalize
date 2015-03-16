@@ -17,6 +17,10 @@
 			templateUrl: 'views/done.html',
 		})
 
+		.when('/about', {
+			templateUrl: 'views/about.html',
+		})
+
 		/*
 		.when('/visualize', {
 			templateUrl: 'views/visualizer.html',
