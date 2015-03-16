@@ -10,10 +10,12 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
 	$scope.sounds = [];
 	$scope.tags = [];
 	$scope.selectedTags = [];
+	$scope.results = [];
 	$scope.soundLoaded = true;
+	$scope.current = {};
 	var main = {};
 
-	$http.get('https://api.myjson.com/bins/55bwf')
+	$http.get('https://api.myjson.com/bins/3yp6f')
 		.success(function(data){
 			main = data;
 			$scope.sounds = main.sounds;
@@ -29,7 +31,9 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
 
 	$scope.setSound = function(sound){
 		$scope.soundLoaded = false;
-
+		$scope.hideIcon($scope.current);
+		$scope.current = sound;
+		$scope.showIcon(sound);
 		var source = document.getElementById('soundSource');
 		var audio = document.getElementById('mainSound');
 		var path = "sounds/" + sound.link;
@@ -44,6 +48,9 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
 		$scope.soundLoaded = true;
 	}
 
+	$scope.showIcon = function(sound) { sound.playing = true; }
+	$scope.hideIcon = function(sound) { sound.playing = false; }
+
 	// This will be more complicated later
 	$scope.getWord = function(words) {
 		return words[1][0];
@@ -54,40 +61,42 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
 		console.log(indices);
 	}
 
+	$scope.showResults = function() {
+		console.log($scope.results);
+		var l = $scope.sounds.length;
+    for (var i = 0; i < l; i++) {
+    	if (!$scope.results.length) {
+    		$scope.sounds[i].result = false;
+  			$scope.sounds[i].nonResult = false;
+  		} else {
+	    	id = $scope.sounds[i].id;
+	    	if ($scope.results.indexOf(id) >= 0) {
+	    		$scope.sounds[i].result = true;
+	  			$scope.sounds[i].nonResult = false;
+	    	}
+	  		else {
+	  			$scope.sounds[i].nonResult = true;
+	  			$scope.sounds[i].result = false;
+	  		}
+	  	}
+	  }
+	}
+
 	$scope.choose = function(tag, $event) {
-    tag.$tag = $($event.target);
-    console.log(tag.indices);
     index = $scope.tags.indexOf(tag);
-   	$scope.tags.splice(index, 1);
+    $scope.tags.splice(index, 1);
     $scope.selectedTags.push(tag);
-
-    for (var i = 0; i < $scope.sounds.length; i++) {
-    	descriptors = $scope.sounds[i].descriptors;
-    	for (var j = 0; j < descriptors.length; j++) {
-    		if (tag.tagName == descriptors[j][0]) {
-    			$scope.results.push($scope.sounds[i]);
-    			break;
-    		}
-    	}
-    }
-
-    names = [];
-    ids = [];
-    console.log($scope.results[0]);
-    for (var i = 0; i < $scope.results.length; i++) {
-  		names.push($scope.results[i].original);
-  		ids.push($scope.results[i].link);
-    }
-
-  	console.log(ids);
-  	console.log(names);
+    $scope.results = $scope.results.concat(tag.indices);
+    $scope.showResults();
   }
 
 	$scope.unchoose = function(tag, $event) {
-    tag.$tag = $($event.target);
     index = $scope.selectedTags.indexOf(tag);
     $scope.selectedTags.splice(index, 1);
     $scope.tags.push(tag);
+    for (var index in tag.indices)
+    	$scope.results.splice($scope.results.indexOf(tag), 1);
+    $scope.showResults();
   }
 
 });

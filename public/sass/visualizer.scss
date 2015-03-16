@@ -27,78 +27,90 @@ audio {
 	margin-right: auto;
 	margin-bottom: 15px;
 }
-
-#semanticTags {
-	margin: 10px;
-	.tag {
-		margin: 10px;
-		@include transition(color 0.2s ease-in-out);
-		&:hover {
-			cursor: pointer;
-			a { text-decoration: none; }
-			.name {
-				color: $text-color + $red;
-				@include transition(color 0.2s ease-in-out);
-			}
-			.count {
-				color: $muted-color + $red;
-				@include transition(color 0.2s ease-in-out);
+#tagLists {
+	max-height: 515px;
+	overflow: scroll;
+	#semanticTags {
+		margin: 5px;
+		padding: 5px;
+		max-height: 475px;
+		overflow: scroll;
+		background: #F6F6F6;
+		.tag {
+			margin: 10px;
+			@include transition(color 0.2s ease-in-out);
+			&:hover {
+				cursor: pointer;
+				a { text-decoration: none; }
+				.name {
+					color: $text-color + $red;
+					@include transition(color 0.2s ease-in-out);
+				}
+				.count {
+					color: $muted-color + $red;
+					@include transition(color 0.2s ease-in-out);
+				}
 			}
 		}
 	}
-}
 
-#selectedTags {
-	margin: 10px;
-	.name { color: $green; }
-	.unselect, .related {
-		opacity: 0;
-		margin-left: 12px;
-	}
-	.selected-tag {
+	#selectedTags {
 		margin: 10px;
-		@include transition(color 0.2s ease-in-out);
-		&:hover {
-			.unselect, .related {
-				opacity: 1;
-				@include transition(opacity 0.2s ease-in-out);
-				&:hover {
-					cursor: pointer;
-					color: $muted-color + $green;
-					@include transition(color 0.2s ease-in-out);
+		.name { color: $green; }
+		.unselect, .related {
+			opacity: 0;
+			margin-left: 12px;
+		}
+		.selected-tag {
+			margin: 10px;
+			@include transition(color 0.2s ease-in-out);
+			&:hover {
+				.unselect, .related {
+					opacity: 1;
+					@include transition(opacity 0.2s ease-in-out);
+					&:hover {
+						cursor: pointer;
+						color: $muted-color + $green;
+						@include transition(color 0.2s ease-in-out);
+					}
 				}
 			}
 		}
 	}
 }
 
-.sound-btn {
-	color: $text-color;
-	font-size: $text-size;
-	width: 100%;
-	min-height: 35px;
-	border: none;
-	background: white;
-	@include transition(color 0.2s ease-in-out);
-	&:focus, &:active, &:hover {
-		outline: none;
-		color: $text-color + $blue !important; 
-	}
-	&.result{
-		font-size: $text-size + 4;
-		color: $emph-color;
-		font-weight: bold;
-		@include transition(all 0.2s ease-in-out);
-	}
-	&.best-result{
-		font-size: $text-size + 6;
-		color: $emph-color;
-		font-weight: bolder;
-		@include transition(all 0.2s ease-in-out);
-	}
-	&.non-result{
-		font-size: $text-size - 4;
-		color: $muted-color;
-		@include transition(all 0.2s ease-in-out);
+.sound {
+	padding: 0 !important;
+	margin: 7px 0 !important;
+	.sound-btn {
+		padding: 0 !important;
+		color: $text-color;
+		font-size: $text-size;
+		width: 100%;
+		min-height: 25px;
+		border: none;
+		background: white;
+		@include transition(color 0.2s ease-in-out);
+		&:focus, &:active, &:hover {
+			outline: none;
+			color: $text-color + $blue !important; 
+		}
+		&.result{
+			font-size: $text-size + 4;
+			color: $emph-color;
+			font-weight: bold;
+			@include transition(all 0.2s ease-in-out);
+		}
+		&.bestResult{
+			font-size: $text-size + 6;
+			color: $emph-color;
+			font-weight: bolder;
+			@include transition(all 0.2s ease-in-out);
+		}
+		&.nonResult{
+			font-size: $text-size - 4;
+			color: $muted-color;
+			@include transition(all 0.2s ease-in-out);
+		}
 	}
 }

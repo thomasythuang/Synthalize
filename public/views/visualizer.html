@@ -35,23 +35,21 @@
         </div>
         <div class="col-md-12">
           <label class="radio-inline">
-            <input ng-model="direction" type="radio" name="direction">Ascending
+            <input ng-model="direction" type="radio" name="direction" checked>Ascending
           </label>
           <label class="radio-inline">
-            <input ng-model="direction" type="radio" name="direction" value="reverse" checked>Descending
+            <input ng-model="direction" type="radio" name="direction" value="reverse">Descending
           </label>
         </div>
       </form>
-      <div class="col-md-12">
+      <div id="tagLists" class="col-md-12">
         <ul class="list-unstyled" id="selectedTags">
           <li class="selected-tag" ng-repeat="tag in selectedTags">
             <span class="name">{{ tag.tagName }}</span>
-            <span ng-click="unchoose(tag, $event)" class="pull-right text-muted unselect">unselect</span>
+            <span class="pull-right text-muted unselect"><i class="fa fa-close" ng-click="unchoose(tag, $event)"></i></span>
             <span class="pull-right text-muted related">related</span>
           </li>
         </ul>
-      </div>
-      <div class="col-md-12">
         <h3 class="placeholder text-center text-muted" ng-hide="query">
           Start typing in the search field to display tags
         </h3>
@@ -67,18 +65,17 @@
 
   <div class="col-md-8" id="sounds">
     <audio controls autoplay id="mainSound">
-			<source id="soundSource" type="audio/wav">
-		</audio>
+     <source id="soundSource" type="audio/wav">
+     </audio>
 
-		<div class="centered" ng-hide="soundLoaded">
-			<span class="fa fa-spinner fa-spin"></span>
-		</div>
-
-    <div ng-repeat="sound in sounds" class="col-md-3 col-sm-3">
-    	<button id="sound{{sound.id}}" type="button" class="sound-btn" ng-click="setSound(sound)">
-    		{{sound.original}}
-        <i style="display:none;" class="fa fa-volume-up"></i>
-  		</button>
+     <div class="centered" ng-hide="soundLoaded">
+       <span class="fa fa-spinner fa-spin"></span>
+     </div>
+     <div ng-repeat="sound in sounds | orderBy: 'original'" class="sound col-md-4">
+     <button id="sound{{sound.id}}" type="button" class="sound-btn" ng-click="setSound(sound)" ng-class="{ result: sound.result, nonResult: sound.nonResult }">
+        {{sound.original}}&nbsp;
+        <i ng-show="sound.playing" class="fa fa-volume-up"></i>
+      </button>
     </div>
   </div>
 </div>
