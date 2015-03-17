@@ -15,7 +15,7 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
 	$scope.current = {};
 	var main = {};
 
-	$http.get('https://api.myjson.com/bins/3yp6f')
+	$http.get('https://api.myjson.com/bins/21x3j')
 		.success(function(data){
 			main = data;
 			$scope.sounds = main.sounds;
@@ -25,11 +25,63 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
 			$scope.loaded = true;
 			$scope.selectedTags = [];
 			$scope.results = [];
-			console.log($scope.sounds[0]);
+			
+			console.log(main);
 		})
 		.error(function(data, status, headers, config){
 			console.log(status);
 		});
+
+
+
+/*
+	$scope.doIt = function(){
+		console.log(main);
+		
+		for (var i = 0; i < main.sounds.length; i++){
+			main.sounds[i].descriptors.forEach(function(desc){
+				var word = checkString(desc[0]);
+				var index = checkDup(word, main.tags);
+				if (index){
+					main.tags[index].indices.push(i);
+				}else{
+					main.tags.push({
+						tagName: word,
+						indices: [i]
+					});
+				}
+			});
+		}
+		console.log(main);
+		//console.log(JSON.stringify(main, null, 2));
+		var url = "https://api.myjson.com/bins";
+		$http.post(url, main)
+			.success(function(data){
+				console.log(data);
+			}); 
+	}
+
+	function checkDup(word, arr){
+		for (var i = 0; i < arr.length; i++){
+			if (arr[i].tagName == word){
+				return i;
+			}
+		}
+		return false;
+	} 
+
+	function checkString(str){
+		var ignoreArray = ["n/a", "no sound", "did not load", "nothing played", "(also no audio)", ".", "n/a", "sorry, this one has an error"];
+		if (ignoreArray.indexOf(str) > -1)
+			return false;
+		else if(str.indexOf(",") > -1){
+			return str.substring(0, str.indexOf(","));
+		}else if (str.indexOf(" ") > -1){
+			return str.substring(0, str.indexOf(" "));
+		}else{
+			return str;
+		}
+	} */
 
 	$scope.setSound = function(sound){
 		$scope.soundLoaded = false;
