@@ -27,86 +27,98 @@ audio {
 	margin-right: auto;
 	margin-bottom: 15px;
 }
-#tagLists {
-	max-height: 515px;
-	overflow: scroll;
-	#semanticTags {
-		margin: 5px;
-		padding: 5px;
-		max-height: 500px;
-		overflow: scroll;
-		background: #F6F6F6;
-		.tag {
-			margin: 10px;
-			@include transition(color 0.2s ease-in-out);
-			&:hover {
-				cursor: pointer;
-				a { text-decoration: none; }
-				.name {
-					color: $text-color + $red;
-					@include transition(color 0.2s ease-in-out);
-				}
-				.count {
-					color: $muted-color + $red;
-					@include transition(color 0.2s ease-in-out);
-				}
-			}
-		}
-	}
 
-	#selectedTags {
-		margin: 10px;
-		.name { color: $green; }
-		.unselect, .related { margin-left: 12px; }
-		.selected-tag {
-			margin: 10px;
-			@include transition(color 0.2s ease-in-out);
-			&:hover {
-				.unselect, .related {
-					@include transition(opacity 0.2s ease-in-out);
+.border-right { border-right: 1px solid #DDD; }
+
+#search {
+	padding: 0 !important;
+	#tagLists {
+		padding: 0;
+		.list {
+			display: inline-block;
+			margin: 0;
+			padding: 0;
+			h4 { margin-bottom: 0; }
+			ul {
+				max-height: 435px;
+				overflow: scroll;
+				margin-top: 5px;
+			}
+			#semanticTags {
+				padding: 1px 5px 0 5px;
+				.tag {
+					margin: 0px 1px 10px 1px;
+					@include transition(color 0.2s ease-in-out);
 					&:hover {
 						cursor: pointer;
-						color: $muted-color + $green;
-						@include transition(color 0.2s ease-in-out);
-					}
-				}
-			}
-		}
-	}
-}
+						.name {
+							color: $text-color + $red;
+							@include transition(color 0.2s ease-in-out);
+						}
+						.count {
+							color: $muted-color + $red;
+							@include transition(color 0.2s ease-in-out);
+						}
+					} //&:hover
+				} //.tag
+			} //#semanticTags
+			#selectedTags {
+				padding: 0 5px;
+				.selected-tag {
+					cursor: default;
+					margin: 0px 1px 10px 1px;
+					.name { color: $green; }
+					.unselect, .related {
+						margin-left: 12px;
+						&:hover {
+							cursor: pointer;
+							color: $muted-color + $green;
+							@include transition(color 0.2s ease-in-out);
+						}
+					} //.unselect, .related
+				} //.selected-tag
+			} //#selectedTags
+		} //.list
+	} //#tagLists
+} //#search
 
-.sound {
-	padding: 0 !important;
-	margin: 7px 0 !important;
-	.sound-btn {
+#patchList {
+	min-height: 565px;
+	border: 1px solid #DDD;
+	border-radius: 10px;
+	.sound {
 		padding: 0 !important;
-		color: $text-color;
-		font-size: $text-size;
-		width: 100%;
-		min-height: 25px;
-		border: none;
-		background: white;
-		@include transition(color 0.2s ease-in-out);
-		&:focus, &:active, &:hover {
-			outline: none;
-			color: $text-color + $blue !important; 
-		}
-		&.result{
-			font-size: $text-size + 4;
-			color: $emph-color;
-			font-weight: bold;
-			@include transition(all 0.2s ease-in-out);
-		}
-		&.bestResult{
-			font-size: $text-size + 6;
-			color: $emph-color;
-			font-weight: bolder;
-			@include transition(all 0.2s ease-in-out);
-		}
-		&.nonResult{
-			font-size: $text-size - 4;
-			color: $muted-color;
-			@include transition(all 0.2s ease-in-out);
-		}
-	}
-}
+		margin: 5px 0 !important;
+		.sound-btn {
+			padding: 0 !important;
+			color: $text-color;
+			font-size: $text-size;
+			width: 100%;
+			min-height: 25px;
+			border: none;
+			background: white;
+			@include transition(color 0.2s ease-in-out);
+			&:focus, &:active, &:hover {
+				outline: none;
+				color: $text-color + $blue !important; 
+			}
+			&.result{
+				font-size: $text-size + 4;
+				color: $emph-color;
+				font-weight: bold;
+				@include transition(all 0.2s ease-in-out);
+			}
+			&.bestResult{
+				font-size: $text-size + 6;
+				color: $emph-color;
+				font-weight: bolder;
+				@include transition(all 0.2s ease-in-out);
+			}
+			&.nonResult{
+				font-size: $text-size - 4;
+				color: $muted-color;
+				@include transition(all 0.2s ease-in-out);
+			}
+		} //.sound-btn
+	} //.sound
+} //#patchList

@@ -19,6 +19,8 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
 		.success(function(data){
 			main = data;
 			$scope.sounds = main.sounds;
+			for (var i = 0; i < $scope.sounds.length; i++)
+				$scope.sounds[i].playing = false;
 			$scope.tags = main.tags;
 			$scope.loaded = true;
 			$scope.selectedTags = [];
@@ -81,6 +83,12 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
 	  	}
 	  }
 	}
+
+ /*
+	chemical compound, highlights stasis
+	alex bell, highlights artic bells, pathos
+	remove chem, keeps arctic bells, stasis
+ */
 
 	$scope.choose = function(tag, $event) {
     index = $scope.tags.indexOf(tag);

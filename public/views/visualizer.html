@@ -21,7 +21,8 @@
 </div>
 
 <div class="container">
-  <div class="col-md-4" id="semantics">
+  <div class="col-md-5" id="semantics">
+    <h2 class="text-center">Descriptive Tags</h2>
     <div class="col-md-10 col-md-offset-1" id="search">
       <form class="form-horizontal col-md-12">
         <input ng-model="query" id="searchbox" class="form-control" placeholder="Search"/>
@@ -42,39 +43,44 @@
         </div> -->
       </form>
       <div id="tagLists" class="col-md-12">
-        <ul class="list-unstyled" id="selectedTags">
-          <li class="selected-tag" ng-repeat="tag in selectedTags">
-            <span class="name">{{ tag.tagName }}</span>
-            <span class="pull-right text-muted unselect"><i class="fa fa-close" ng-click="unchoose(tag, $event)"></i></span>
-            <span class="pull-right text-muted related">related</span>
-          </li>
-        </ul>
         <h3 class="placeholder text-center text-muted" ng-hide="query">
-          Start typing in the search field to display tags
+          Start typing in the search field to find tags
         </h3>
-        <ul class="list-unstyled" id="semanticTags" ng-show="query">
-          <li ng-click="choose(tag, $event)" ng-repeat="tag in tags | filter: query | orderBy: order | limitTo: 100" class="tag">
-            <span class="name">{{ tag.tagName }}</span>
-            <span class="pull-right text-muted count">{{ tag.indices.length }}</span>
-          </li>
-        </ul>
+        <div class="col-md-6 list border-right">
+          <h4 ng-show="query" class="text-center">Click tag to show patches it describes</h4>
+          <ul ng-show="query" class="list-unstyled" id="semanticTags">
+            <li ng-click="choose(tag, $event)" ng-repeat="tag in tags | filter: query | orderBy: order | limitTo: 100" class="tag">
+              <span class="name">{{ tag.tagName }}</span>
+              <span class="pull-right text-muted count">{{ tag.indices.length }}</span>
+            </li>
+          </ul>
+        </div>
+        <div ng-show="query || selectedTags.length" class="col-md-6 list">
+          <h4 class="text-center">Selected Tags</h4><br>
+          <ul class="list-unstyled" id="selectedTags">
+            <li class="selected-tag" ng-repeat="tag in selectedTags">
+              <span class="name">{{ tag.tagName }}</span>
+              <span class="pull-right text-muted unselect"><i class="fa fa-close" ng-click="unchoose(tag, $event)"></i></span>
+              <span class="pull-right text-muted related">related</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="col-md-8" id="sounds">
+  <div class="col-md-7" id="sounds">
     <audio controls autoplay id="mainSound">
-     <source id="soundSource" type="audio/wav">
-     </audio>
-
-     <div class="centered" ng-hide="soundLoaded">
-       <span class="fa fa-spinner fa-spin"></span>
-     </div>
-     <div ng-repeat="sound in sounds | orderBy: 'original'" class="sound col-md-4">
-     <button id="sound{{sound.id}}" type="button" class="sound-btn" ng-click="setSound(sound)" ng-class="{ result: sound.result, nonResult: sound.nonResult }">
-        {{sound.original}}&nbsp;
-        <i ng-show="sound.playing" class="fa fa-volume-up"></i>
-      </button>
+      <source id="soundSource" type="audio/wav">
+    </audio>
+    <h2 class="text-center">Synth Patches</h2>
+    <div id="patchList">
+      <div ng-repeat="sound in sounds | orderBy: 'original'" class="sound col-md-4">
+        <button id="sound{{sound.id}}" type="button" class="sound-btn" ng-click="setSound(sound)" ng-class="{ result: sound.result, nonResult: sound.nonResult }">
+          {{sound.original}}&nbsp;
+          <i ng-class="{ 'fa-volume-up': sound.playing, 'fa-volume-off': !sound.playing }" class="fa"></i>
+        </button>
+      </div>
     </div>
   </div>
 </div>
