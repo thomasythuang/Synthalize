@@ -25,7 +25,7 @@
     <h2 class="text-center">Descriptive Tags</h2>
     <div class="col-md-10 col-md-offset-1" id="search">
       <form class="form-horizontal col-md-12">
-        <input ng-model="query" id="searchbox" class="form-control" placeholder="Search"/>
+        <input ng-model="query" autocomplete="off" id="searchbox" class="form-control" placeholder="Search"/>
         <label class="control-label col-md-5">sort by:</label>
         <div class="col-md-7">
           <select id="filter" class="form-control" ng-init="order='-indices.length'" ng-model="order">
@@ -33,25 +33,17 @@
             <option value="-indices.length">Count</option>
           </select>
         </div>
-       <!--  <div class="col-md-12">
-          <label class="radio-inline">
-            <input ng-model="direction" type="radio" name="direction" checked>Ascending
-          </label>
-          <label class="radio-inline">
-            <input ng-model="direction" type="radio" name="direction" value="reverse">Descending
-          </label>
-        </div> -->
       </form>
       <div id="tagLists" class="col-md-12">
         <h3 class="placeholder text-center text-muted" ng-hide="query">
           Start typing in the search field to find tags
         </h3>
-        <div class="col-md-6 list border-right">
+        <div ng-hide="showRelated" class="col-md-6 list border-right">
           <h4 ng-show="query" class="text-center">Click tag to show patches it describes</h4>
           <ul ng-show="query" class="list-unstyled" id="semanticTags">
-            <li ng-click="choose(tag, $event)" ng-repeat="tag in tags | filter: query | orderBy: order | limitTo: 100" class="tag">
-              <span class="name">{{ tag.tagName }}</span>
-              <span class="pull-right text-muted count">{{ tag.indices.length }}</span>
+            <li ng-click="choose(tag)" ng-repeat="tag in tags | filter: query | orderBy: order | limitTo: 100" class="tag">
+              <span class="col-md-11 name">{{ tag.tagName }}</span>
+              <span class="col-md-1 text-muted count">{{ tag.indices.length }}</span>
             </li>
           </ul>
         </div>
@@ -59,9 +51,19 @@
           <h4 class="text-center">Selected Tags</h4><br>
           <ul class="list-unstyled" id="selectedTags">
             <li class="selected-tag" ng-repeat="tag in selectedTags">
-              <span class="name">{{ tag.tagName }}</span>
-              <span class="pull-right text-muted unselect"><i class="fa fa-close" ng-click="unchoose(tag, $event)"></i></span>
-              <span class="pull-right text-muted related">related</span>
+              <span ng-class="{ highlighted: related == $index }" class="col-md-7 name">{{ tag.tagName }}</span>
+              <span ng-hide="related == $index" ng-click="getRelated(tag, $index)" class="col-md-4 text-muted related">related</span>
+              <span class="col-md-1 pull-right text-muted unselect"><i class="fa fa-close" ng-click="unchoose(tag, $index)"></i></span>
+            </li>
+          </ul>
+        </div>
+        <div ng-show="showRelated" class="col-md-6 list">
+          <h4 class="text-center">Related Tags</h4><br>
+          <h5 ng-hide="relatedTags.length" class="text-center text-muted">No related tags</h5>
+          <ul class="list-unstyled" id="relatedTags">
+            <li ng-click="chooseRoot(tag)" class="related-tag" ng-repeat="tag in relatedTags | orderBy: '-indices.length'">
+              <span class="col-md-11 name">{{ tag.tagName }}</span>
+              <span class="col-md-1 text-muted count">{{ tag.indices.length }}</span>
             </li>
           </ul>
         </div>

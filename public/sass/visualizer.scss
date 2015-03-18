@@ -4,8 +4,9 @@ $text-color: #333;
 $muted-color: #777;
 $emph-color: #000;
 $red: #D00;
-$blue: #00B;
+$blue: #088;
 $green: #070;
+$purple: #707;
 $text-size: 14px;
 
 audio {
@@ -44,6 +45,10 @@ audio {
 				overflow: scroll;
 				margin-top: 5px;
 			}
+			span { 
+				padding: 0 !important;
+				margin: 2px 0 !important;
+			}
 			#semanticTags {
 				padding: 1px 5px 0 5px;
 				.tag {
@@ -51,33 +56,46 @@ audio {
 					@include transition(color 0.2s ease-in-out);
 					&:hover {
 						cursor: pointer;
-						.name {
-							color: $text-color + $red;
+						span {
 							@include transition(color 0.2s ease-in-out);
+							text-shadow: 1px 1px #DDD;
 						}
-						.count {
-							color: $muted-color + $red;
-							@include transition(color 0.2s ease-in-out);
-						}
+						.name { color: $text-color + $red; }
+						.count { color: $muted-color + $red; }
 					} //&:hover
 				} //.tag
 			} //#semanticTags
-			#selectedTags {
+			#selectedTags, #relatedTags {
 				padding: 0 5px;
 				.selected-tag {
 					cursor: default;
 					margin: 0px 1px 10px 1px;
-					.name { color: $green; }
-					.unselect, .related {
-						margin-left: 12px;
-						&:hover {
-							cursor: pointer;
-							color: $muted-color + $green;
-							@include transition(color 0.2s ease-in-out);
+					.name {
+						color: $green;
+						&.highlighted {
+							font-weight: bolder;
 						}
-					} //.unselect, .related
+					}
+					.unselect:hover, .related:hover {
+						cursor: pointer;
+						color: $muted-color + $green;
+						@include transition(color 0.2s ease-in-out);
+					} //.unselect:hover, .related:hover
 				} //.selected-tag
-			} //#selectedTags
+				.related-tag {
+					margin: 0px 1px 10px 1px;
+					@include transition(color 0.2s ease-in-out);
+					&:hover {
+						cursor: pointer;
+						span {
+							@include transition(color 0.2s ease-in-out);
+							text-shadow: 1px 1px #DDD;
+						}
+						.name { color: $text-color + $purple; }
+						.count { color: $muted-color + $purple; }
+					} //&:hover
+				} //.related-tag
+			} //#selectedTags, #relatedTags
 		} //.list
 	} //#tagLists
 } //#search
@@ -100,7 +118,8 @@ audio {
 			@include transition(color 0.2s ease-in-out);
 			&:focus, &:active, &:hover {
 				outline: none;
-				color: $text-color + $blue !important; 
+				color: $text-color + $blue !important;
+				text-shadow: 1px 1px #DDD;
 			}
 			&.result{
 				font-size: $text-size + 4;

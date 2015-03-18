@@ -10,9 +10,12 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
 	$scope.sounds = [];
 	$scope.tags = [];
 	$scope.selectedTags = [];
+	$scope.relatedTags = [];
 	$scope.results = [];
 	$scope.soundLoaded = true;
 	$scope.current = {};
+	$scope.related = -1;
+	$scope.showRelated = false;
 	var main = {};
 
 	$http.get('https://api.myjson.com/bins/21x3j')
@@ -25,8 +28,6 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
 			$scope.loaded = true;
 			$scope.selectedTags = [];
 			$scope.results = [];
-			
-			console.log(main);
 		})
 		.error(function(data, status, headers, config){
 			console.log(status);
@@ -116,7 +117,6 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
 	}
 
 	$scope.showResults = function() {
-		console.log($scope.results);
 		var l = $scope.sounds.length;
     for (var i = 0; i < l; i++) {
     	if (!$scope.results.length) {
@@ -141,8 +141,12 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
 	alex bell, highlights artic bells, pathos
 	remove chem, keeps arctic bells, stasis
  */
+ 	$scope.chooseRoot = function(tag) {
+ 		$scope.resetRelated();
+ 		$scope.choose($scope.tags[tag.rootTag]);
+ 	}
 
-	$scope.choose = function(tag, $event) {
+	$scope.choose = function(tag) {
     index = $scope.tags.indexOf(tag);
     $scope.tags.splice(index, 1);
     $scope.selectedTags.push(tag);
@@ -150,13 +154,49 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
     $scope.showResults();
   }
 
-	$scope.unchoose = function(tag, $event) {
+	$scope.unchoose = function(tag, index) {
+		if ($scope.related == index) $scope.resetRelated();
     index = $scope.selectedTags.indexOf(tag);
     $scope.selectedTags.splice(index, 1);
     $scope.tags.push(tag);
-    for (var index in tag.indices)
-    	$scope.results.splice($scope.results.indexOf(tag), 1);
+    for (var i = 0; i < tag.indices.length; i++)
+    	$scope.results.splice($scope.results.indexOf(tag.indices[i]), 1);
     $scope.showResults();
+  }
+
+  $scope.getRelated = function(tag, index) {
+  	if ($scope.related != -1) $scope.resetRelated();
+  	$scope.related = index;
+  	$scope.showRelated = true;
+  	var pushedTags = [];
+		for (var i = 0; i < tag.indices.length; i++) {
+			var l = $scope.sounds[i].tags.length;
+			for (var j = 0; j < l; j++) {
+				for (var k = 0; k < $scope.tags.length; k++) {
+			 		if ($scope.tags[k].tagName == $scope.sounds[i].tags[j] && pushedTags.indexOf($scope.tags[k].tagName) == -1) {
+						$scope.relatedTags.push($scope.tags[k]);
+						pushedTags.push($scope.tags[k].tagName);
+						el = $scope.relatedTags.length - 1;
+						for (var m = 0; m < $scope.relatedTags[el].indices.length; m++) {
+							if ($scope.results.indexOf($scope.relatedTags[el].indices[m]) == -1)
+								$scope.relatedTags[el].indices.splice(m--, 1);
+						}
+						if ($scope.relatedTags[el].indices.length == 0) {
+							$scope.relatedTags.pop();
+							pushedTags.pop();
+						} else
+							$scope.relatedTags[el].rootTag = k;
+						break;
+					}
+				}
+			}
+		}
+  }
+
+  $scope.resetRelated = function() {
+		$scope.related = -1;
+		$scope.relatedTags = [];
+		$scope.showRelated = false;
   }
 
 });
