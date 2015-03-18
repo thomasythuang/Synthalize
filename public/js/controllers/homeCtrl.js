@@ -165,17 +165,21 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
   }
 
   $scope.getRelated = function(tag, index) {
-  	if ($scope.related != -1) $scope.resetRelated();
+  	console.log($scope.relatedTags);
+  	$scope.resetRelated();
   	$scope.related = index;
+  	console.log($scope.relatedTags);
   	$scope.showRelated = true;
-  	var pushedTags = [];
+  	var pushedTags = [tag.tagName];
 		for (var i = 0; i < tag.indices.length; i++) {
 			var l = $scope.sounds[i].tags.length;
 			for (var j = 0; j < l; j++) {
 				for (var k = 0; k < $scope.tags.length; k++) {
 			 		if ($scope.tags[k].tagName == $scope.sounds[i].tags[j] && pushedTags.indexOf($scope.tags[k].tagName) == -1) {
-						$scope.relatedTags.push($scope.tags[k]);
-						pushedTags.push($scope.tags[k].tagName);
+						var tag = {};
+						tag.tagName = $scope.tags[k].tagName;
+						tag.indices = $scope.tags[k].indices;
+						$scope.relatedTags.push(tag);
 						el = $scope.relatedTags.length - 1;
 						for (var m = 0; m < $scope.relatedTags[el].indices.length; m++) {
 							if ($scope.results.indexOf($scope.relatedTags[el].indices[m]) == -1)
@@ -183,9 +187,10 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
 						}
 						if ($scope.relatedTags[el].indices.length == 0) {
 							$scope.relatedTags.pop();
-							pushedTags.pop();
-						} else
+						} else {
 							$scope.relatedTags[el].rootTag = k;
+							pushedTags.push($scope.tags[k].tagName);
+						}
 						break;
 					}
 				}

@@ -1,5 +1,8 @@
 @import "compass/css3";
 
+$main-bg-color: #555;
+$patches-panel-color: #FEF;
+$tags-panel-color: #EFF;
 $text-color: #333;
 $muted-color: #777;
 $emph-color: #000;
@@ -9,17 +12,29 @@ $green: #070;
 $purple: #707;
 $text-size: 14px;
 
+body { background: $main-bg-color !important; }
+h2 { color: #EEE !important; }
+#semantics, #sounds { 
+	height: 565px;
+	border-radius: 10px;
+	border-right: 3px solid $main-bg-color;
+	border-left: 3px solid $main-bg-color;
+}
+
+#sounds { background: $patches-panel-color; }
+#semantics { background: $tags-panel-color; }
+
 audio {
 	opacity: 0;
 	position: absolute;
 }
 
-#sounds div {
-	margin-bottom: 15px;
-}
+// #sounds div {
+// 	margin-bottom: 15px;
+// }
 
 #searchbox {
-	margin-bottom: 10px;
+	margin: 10px 0;
 }
 
 #mainSound {
@@ -30,6 +45,7 @@ audio {
 }
 
 .border-right { border-right: 1px solid #DDD; }
+.border-bottom { border-bottom: 1px solid #DDD; }
 
 #search {
 	padding: 0 !important;
@@ -37,11 +53,12 @@ audio {
 		padding: 0;
 		.list {
 			display: inline-block;
-			margin: 0;
+			margin: 10px 0;
 			padding: 0;
-			h4 { margin-bottom: 0; }
+			&.short ul{ height: 159px; }
+			h4 { margin: 2px 0; }
 			ul {
-				max-height: 435px;
+				height: 400px;
 				overflow: scroll;
 				margin-top: 5px;
 			}
@@ -50,7 +67,7 @@ audio {
 				margin: 2px 0 !important;
 			}
 			#semanticTags {
-				padding: 1px 5px 0 5px;
+				padding: 3px 5px 0 5px;
 				.tag {
 					margin: 0px 1px 10px 1px;
 					@include transition(color 0.2s ease-in-out);
@@ -100,44 +117,39 @@ audio {
 	} //#tagLists
 } //#search
 
-#patchList {
-	min-height: 565px;
-	border: 1px solid #DDD;
-	border-radius: 10px;
-	.sound {
+.sound {
+	padding: 0 !important;
+	margin: 5px 0 !important;
+	.sound-btn {
 		padding: 0 !important;
-		margin: 5px 0 !important;
-		.sound-btn {
-			padding: 0 !important;
-			color: $text-color;
-			font-size: $text-size;
-			width: 100%;
-			min-height: 25px;
-			border: none;
-			background: white;
-			@include transition(color 0.2s ease-in-out);
-			&:focus, &:active, &:hover {
-				outline: none;
-				color: $text-color + $blue !important;
-				text-shadow: 1px 1px #DDD;
-			}
-			&.result{
-				font-size: $text-size + 4;
-				color: $emph-color;
-				font-weight: bold;
-				@include transition(all 0.2s ease-in-out);
-			}
-			&.bestResult{
-				font-size: $text-size + 6;
-				color: $emph-color;
-				font-weight: bolder;
-				@include transition(all 0.2s ease-in-out);
-			}
-			&.nonResult{
-				font-size: $text-size - 4;
-				color: $muted-color;
-				@include transition(all 0.2s ease-in-out);
-			}
-		} //.sound-btn
-	} //.sound
-} //#patchList
+		color: $text-color;
+		font-size: $text-size;
+		width: 100%;
+		min-height: 25px;
+		border: none;
+		background: transparent;
+		@include transition(color 0.2s ease-in-out);
+		&:focus, &:active, &:hover {
+			outline: none;
+			color: $text-color + $blue !important;
+			text-shadow: 1px 1px #DDD;
+		}
+		&.result{
+			font-size: $text-size + 4;
+			color: $emph-color;
+			font-weight: bold;
+			@include transition(all 0.2s ease-in-out);
+		}
+		&.bestResult{
+			font-size: $text-size + 6;
+			color: $emph-color;
+			font-weight: bolder;
+			@include transition(all 0.2s ease-in-out);
+		}
+		&.nonResult{
+			font-size: $text-size - 4;
+			color: $muted-color;
+			@include transition(all 0.2s ease-in-out);
+		}
+	} //.sound-btn
+} //.sound
