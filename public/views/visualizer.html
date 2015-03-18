@@ -36,7 +36,7 @@
       </form>
       <div id="tagLists" class="col-md-12">
         <h3 class="placeholder text-center text-muted" ng-hide="query">
-          Start typing in the search field to find tags
+          Sort synth patches by searching for descriptive words
         </h3>
         <div ng-hide="showRelated" class="col-md-6 list border-right">
           <h4 ng-show="query" class="text-center">Click tag to show patches it describes</h4>
@@ -75,6 +75,7 @@
       <source id="soundSource" type="audio/wav">
     </audio>
     <h2 class="text-center">Synth Patches</h2>
+    <h4 class="centered">Click patch names to hear it play a scale and chord</h4>
     <div id="patchList">
       <div ng-repeat="sound in sounds | orderBy: 'original'" class="sound col-md-4">
         <button id="sound{{sound.id}}" type="button" class="sound-btn" ng-click="setSound(sound)" ng-class="{ result: sound.result, nonResult: sound.nonResult }">
