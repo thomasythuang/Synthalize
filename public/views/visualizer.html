@@ -21,11 +21,13 @@
 </div>
 
 <div class="container">
-  <div class="col-md-5">
+  <div class="desc col-md-5">
     <h2 class="text-center">Descriptive Tags</h2>
+    <h4 class="text-center">Search for words describing your desired sound</h4>
   </div>
-  <div class="col-md-7">
+  <div class="desc col-md-7">
     <h2 class="text-center">Synth Patches</h2>
+    <h4 class="centered">Click patch names to hear it play a scale and chord</h4>
   </div>
   <div class="col-md-5" id="semantics">
     <div class="col-md-10 col-md-offset-1" id="search">
@@ -34,8 +36,8 @@
         <label class="control-label col-md-5">sort by:</label>
         <div class="col-md-7">
           <select id="filter" class="form-control" ng-init="order='-indices.length'" ng-model="order">
-            <option value="tagName">ABC</option>
-            <option value="-indices.length">Count</option>
+            <option value="tagName">Alphabetical</option>
+            <option value="-indices.length">Most Tag Matches</option>
           </select>
         </div>
       </form>
@@ -62,7 +64,7 @@
             </li>
           </ul>
         </div>
-        <div ng-show="showRelated" class="col-md-6 list short">
+        <div ng-show="related != -1" class="col-md-6 list short">
           <h4 class="text-center">Related Tags</h4><br>
           <h5 ng-hide="relatedTags.length" class="text-center text-muted">No related tags</h5>
           <ul class="list-unstyled" id="relatedTags">

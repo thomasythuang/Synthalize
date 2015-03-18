@@ -15,10 +15,10 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
 	$scope.soundLoaded = true;
 	$scope.current = {};
 	$scope.related = -1;
-	$scope.showRelated = false;
 	var main = {};
 
-	$http.get('https://api.myjson.com/bins/21x3j')
+	//$http.get('https://api.myjson.com/bins/21x3j')
+	$http.get('https://api.myjson.com/bins/nm7v')
 		.success(function(data){
 			main = data;
 			$scope.sounds = main.sounds;
@@ -165,10 +165,8 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
   }
 
   $scope.getRelated = function(tag, index) {
-  	console.log($scope.relatedTags);
-  	$scope.resetRelated();
+		$scope.relatedTags = [];
   	$scope.related = index;
-  	console.log($scope.relatedTags);
   	$scope.showRelated = true;
   	var pushedTags = [tag.tagName];
 		for (var i = 0; i < tag.indices.length; i++) {
@@ -176,19 +174,16 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
 			for (var j = 0; j < l; j++) {
 				for (var k = 0; k < $scope.tags.length; k++) {
 			 		if ($scope.tags[k].tagName == $scope.sounds[i].tags[j] && pushedTags.indexOf($scope.tags[k].tagName) == -1) {
-						var tag = {};
-						tag.tagName = $scope.tags[k].tagName;
-						tag.indices = $scope.tags[k].indices;
-						$scope.relatedTags.push(tag);
-						el = $scope.relatedTags.length - 1;
-						for (var m = 0; m < $scope.relatedTags[el].indices.length; m++) {
-							if ($scope.results.indexOf($scope.relatedTags[el].indices[m]) == -1)
-								$scope.relatedTags[el].indices.splice(m--, 1);
+						var temp = {};
+						temp.tagName = $scope.tags[k].tagName;
+						temp.indices = $scope.tags[k].indices;
+						temp.rootTag = k;
+						for (var m = 0; m < temp.indices.length; m++) {
+							if ($scope.results.indexOf(temp.indices[m]) == -1)
+								temp.indices.splice(m--, 1);
 						}
-						if ($scope.relatedTags[el].indices.length == 0) {
-							$scope.relatedTags.pop();
-						} else {
-							$scope.relatedTags[el].rootTag = k;
+						if (temp.indices.length > 0) {
+							$scope.relatedTags.push(temp);
 							pushedTags.push($scope.tags[k].tagName);
 						}
 						break;
@@ -201,7 +196,6 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
   $scope.resetRelated = function() {
 		$scope.related = -1;
 		$scope.relatedTags = [];
-		$scope.showRelated = false;
   }
 
 });

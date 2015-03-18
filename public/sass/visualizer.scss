@@ -13,7 +13,7 @@ $purple: #707;
 $text-size: 14px;
 
 body { background: $main-bg-color !important; }
-h2 { color: #EEE !important; }
+.desc h2, .desc h4 { color: #EEE !important; }
 #semantics, #sounds { 
 	height: 565px;
 	border-radius: 10px;
