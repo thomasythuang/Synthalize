@@ -23,6 +23,7 @@
 <div class="container">
   <div class="col-md-5" id="semantics">
     <h2 class="text-center">Descriptive Tags</h2>
+    <h4 class="text-center">Search for descriptive tags</h4>
     <div class="col-md-10 col-md-offset-1" id="search">
       <form class="form-horizontal col-md-12">
         <input ng-model="query" autocomplete="off" id="searchbox" class="form-control" placeholder="Search"/>
@@ -36,7 +37,7 @@
       </form>
       <div id="tagLists" class="col-md-12">
         <h3 class="placeholder text-center text-muted" ng-hide="query">
-          Sort synth patches by searching for descriptive words
+          Use descriptors to highlight tagged synth patches
         </h3>
         <div ng-hide="showRelated" class="col-md-6 list border-right">
           <h4 ng-show="query" class="text-center">Click tag to show patches it describes</h4>
