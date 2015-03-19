@@ -18,7 +18,7 @@ app.controller('homeController', function($scope, $http, $location, $firebase){
 	var main = {};
 
 	//$http.get('https://api.myjson.com/bins/21x3j')
-	$http.get('https://api.myjson.com/bins/nm7v')
+	$http.get('https://api.myjson.com/bins/2zf6z')
 		.success(function(data){
 			main = data;
 			$scope.sounds = main.sounds;
