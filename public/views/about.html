@@ -13,8 +13,8 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="/about">About</a></li> <!--
-        <li><a href="/contact">Contact</a></li> -->
+        <li><a href="/about">About</a></li>
+        <li><a href="/abstract.pdf" target="_blank">Abstract</a></li>
       </ul>
     </div>
   </div>
@@ -22,7 +22,7 @@
 
 <div class="container panel panel-primary">
 	<h1>Synthalize</h1>
-	<p>This is our project for <a href="http://cs.northwestern.edu/~pardo/courses/eecs352/">EECS 352</a> with Bryan Pardo. You can read about it here or <a href="/">try it out!</a></p>
+	<p>This is our project for <a href="http://cs.northwestern.edu/~pardo/courses/eecs352/">EECS 352</a> with Bryan Pardo at Northwestern University. You can read our abstract <a href="/abstract.pdf" target="_blank">here</a> or <a href="/">try it out!</a></p>
 
 	<div id="profiles" class="row">
 		<div class="col-md-4">
@@ -40,18 +40,48 @@
 	</div>
 
 	<h1>Introduction</h1>
-	<p>Introduction here</p>
+	<div class="row">
+		<div class="col-md-7">
+			<p>In today's modern era, synthesizers are widely used by music professionals and casual musicians alike. However, all synthesizers share shortcomings on one area: finding and creating a desired sound. Whether analog or digital, synthesizers all have a "semantic gap" between the language used by the machine and the language used by the producer. While a user may desire a "warm" or "buzzy" sound, synthesizers have no adjustable parameters that can directly produce a similar sound using those adjectives. Many synthesizers do have factory preset settings to attempt to combat this, but they nearly all have nonsensical names such as "DramaQueen" or "Break it Down" that provide miminal help in finding an appropriate synthesizer setting. Because of this problem, it is often difficult, frustrating, and time-consuming to find a desired sound when using a synthesizer.</p>
 
-	<h1>Goals</h1>
-	<p>Goals here</p>
+			<h1>Our Solution</h1>
+			<p>To solve that problem, we constructed an interface, Synthalize, that uses crowdsourced semantic data to enable synth patch selection via descriptive words instead of adjusting complicated parameters. Users search for words that describe the type of sound they desire, and when a word is selected, all synth patches matching that word are highlighted.</p>
+		</div>
+		<div class="col-md-5">
+			<img class="col-md-12" src="img/synth.png">
+			<div class="text-center">A traditional synthesizer interface and presets</div>
+		</div>	
+	</div>
 
 	<h1>Process/Implementation</h1>
-	<p>Process here</p>
+	<div class="row">
+		<div class="col-md-6">In creating Synthalize, we performed the following procedure:
+			<ol><br>
+				<li>Generate 48 synthesized sounds with the Massive synthesizer by Native Instruments. Each sound plays the same melody, but the timbres are different.</li>
+				<li>Gather descriptive words for each of those sounds using Amazon Mechanical Turk. Survey takers (~150) were provided 4 of the 48 sounds and asked to describe each of the provided sounds. This resulted in over 600 descriptor results for the synthesized sounds.</li>
+				<li>Use the results from Mechanical Turk to generate an even larger list of semantic tags for each sound. The semantic tags contain the original descriptors gathered from Mechanical Turk as well as synonyms for each of those descriptors, taken from the Big Huge Thesaurus API (http://words.bighugelabs.com/api.php). This resulted in an overall list of over semantic 1500 tags, many of which describe multiple sounds.</li>
+				<li>Construct an interface to act as a synthesizer controller. Each synth patch is displayed with its original name and can be clicked on to play its associated sound. Additionally, the list of semantic tags can be searched with a search box on the left side of the interface. When a semantic tag is selected, it highlights each of the synthesizer patches that it is linked to.</li>
+				<li>Tools and resources used to construct Synthalize included Massive (synthesizer), Node.js and AngularJS (creating a web application), and Heroku (hosting the web app).</li>
+			</ol>
+		</div>
+		<div class="col-md-6">
+			<img class="col-md-12" src="img/survey.png">
+			<div class="text-center">The Amazon Mechanical Turk survey</div>
+		</div>
+	</div>
 
 	<h1>Results</h1>
 	<p>Results here</p>
 
-	<h1>Conclusions and Future Work</h1>
-	<p>Conclusion here</p>
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Conclusions and Future Work</h1>
+			<p>Overall, many of our goals were achieved. We were able conduct successful crowdsourcing through Mechanical Turk, and the majority of testers found their desired sounds faster using the tag search than without it. </p>
+			<p>However, the testing revealed that one of the biggest features Synthalize is lacking right now is size and scope. With only 48 static synth patches currently, a situation occurred semi-often in testing where a user would search for a descriptor and not find any results. This is because the relatively low number of synth patches and their descriptors/synonyms simply did not cover all possible tags and words that could describe the timbre of a sound.</p>
+			<p>This showed a need for a more dynamic and flexible application. Rather than matching words to prerecorded sounds and displaying those words, the ideal program would instead take a user descriptor and analyze that to adjust a web synthesizer’s (such as Web Audio API) settings instead to create a sound in real time resembling the descriptor.</p>
+			<p>Future work would definitely proceed in that direction, and below is a digital rendering of how a future interface would appear:</p>
+		</div>
+		<img class="col-md-8 col-md-offset-2" src="img/future-interface.png">
+	</div>
 </div>
 
