@@ -8,7 +8,7 @@
 			controller: 'homeController'
 		})
 
-		.when('/listen', {
+		.when('/survey', {
 			templateUrl: 'views/listen.html',
 			controller: 'listenController'
 		})
@@ -21,12 +21,10 @@
 			templateUrl: 'views/about.html',
 		})
 
-		/*
-		.when('/visualize', {
-			templateUrl: 'views/visualizer.html',
-			controller: 'homeController',
-		}) */
-		
+		.when('/future', {
+			templateUrl: 'views/future.html',
+		})
+	
 		.when('/404', {
 			templateUrl: '../views/404.html',
 		}); 

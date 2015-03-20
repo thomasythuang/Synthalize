@@ -9,6 +9,7 @@ app.controller('listenController', function($scope, $http, $location, $firebase)
 	
 	var ref = new Firebase("https://synthalize.firebaseio.com/");
 	var data = $firebase(ref).$asArray();
+	console.log(data);
 	$scope.loaded = false;
 	$scope.desc = [];
 	$scope.links = [];
